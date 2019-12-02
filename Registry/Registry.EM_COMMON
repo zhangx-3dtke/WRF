@@ -334,7 +334,7 @@ state    real   ht_coarse       ij     misc        1   -     r                - 
 
 
 # TKE
-state    real   tke            ikj     dyn_em      2         -       r        "tke"          "TURBULENCE KINETIC ENERGY"     "m2 s-2"
+state    real   tke            ikj     dyn_em      2         -       rh       "tke"          "TURBULENCE KINETIC ENERGY"     "m2 s-2"
 i1       real   tke_tend       ikj     dyn_em      1         -      
 
 # variables in 3DTKE scheme (km_opt=5, 07/27/2019, XZ)
@@ -342,24 +342,9 @@ state    real  nlflux          ikj     dyn_em        1         Z      -      "NL
 state    real  gamu            ij      dyn_em        1         -      r      "GAMU"            "NONLOCAL U GAMMA TERM IN 3DTKE SCHEME"         "s-1"
 state    real  gamv            ij      dyn_em        1         -      r      "GAMV"            "NONLOCAL V GAMMA TERM IN 3DTKE SCHEME"         "s-1"
 state    real  dlk             ikj     dyn_em        1         -      -      "DLK"             "TURBULENT LENGTH SCALE"     "m"
-state    real  l_scale         ikj     dyn_em        1         -      -      "L_SCALE"         "DISSIPATION LENGTH SCALE"   "m"
+state    real  l_diss          ikj     dyn_em        1         -      -      "L_DISS"         "DISSIPATION LENGTH SCALE"   "m"
 state    real  elmin           ikj     dyn_em        1         -      -      "ELMIN"           "FREE ATMOS LENGTH SCALE (FROM BOULAC SCHEME)"  "m"
 state    real  xkmv_meso       ikj     dyn_em        1         -      -      "XKMV_MESO"       "XKMV AT MESOSCALE LIMIT"    "m2 s-1"
-state    real  xkmh_t          ikj     dyn_em        1         -      -      "XKMH_T"          "HORIZONTAL DIFFUSIVITY BASED ON 1.5-ORDER TKE" "m2 s-1"
-state    real  U_H_TEND        ikj     dyn_em        1         X      -      "U_H_TEND"        "X WIND HORIZONTAL TENDENCY IN 3DTKE SCHEME"  "m s-2"
-state    real  U_Z_TEND        ikj     dyn_em        1         X      -      "U_Z_TEND"        "X WIND VERTICAL TENDENCY IN 3DTKE SCHEME"  "m s-2"
-state    real  V_H_TEND        ikj     dyn_em        1         Y      -      "V_H_TEND"        "Y WIND HORIZONTAL TENDENCY IN 3DTKE SCHEME"  "m s-2"
-state    real  V_Z_TEND        ikj     dyn_em        1         Y      -      "V_Z_TEND"        "Y WIND VERTICAL TENDENCY IN 3DTKE SCHEME"  "m s-2"
-state    real  W_H_TEND        ikj     dyn_em        1         Z      -      "W_H_TEND"        "W WIND HORIZONTAL TENDENCY IN 3DTKE SCHEME"  "m s-2"
-state    real  W_Z_TEND        ikj     dyn_em        1         Z      -      "W_Z_TEND"        "W WIND VERTICAL TENDENCY IN 3DTKE SCHEME"  "m s-2"
-state    real  TH_H_TEND       ikj     dyn_em        1         -      -      "TH_H_TEND"       "TH HORIZONTAL TENDENCY IN 3DTKE SCHEME"  "m s-2"
-state    real  TH_Z_TEND       ikj     dyn_em        1         -      -      "TH_Z_TEND"       "TH VERTICAL TENDENCY IN 3DTKE SCHEME"  "m s-2"
-state    real  TKE_BUOY_TEND     ikj      dyn_em        1        -      -       "TKE_BUOY_TEND"        "TKE BUOYANCY TENDENCY IN 3DTKE SCHEME"  "m s-2"
-state    real  TKE_SHEAR_TEND    ikj      dyn_em        1        -      -       "TKE_SHEAR_TEND"       "TKE SHEAR TENDENCY IN 3DTKE SCHEME"  "m s-2"
-state    real  TKE_PRODUCTION_TEND     ikj      dyn_em        1        -      -       "TKE_PRODUCTION_TEND"     "TKE PRODUCTION TENDENCY IN 3DTKE SCHEME"  "m s-2"
-state    real  TKE_DIFFUSION_H_TEND    ikj      dyn_em        1        -      -       "TKE_DIFFUSION_H_TEND"    "TKE HORIZONTAL DIFFUSION TENDENCY IN 3DTKE SCHEME"  "m s-2"
-state    real  TKE_DIFFUSION_Z_TEND    ikj      dyn_em        1        -      -       "TKE_DIFFUSION_Z_TEND"    "TKE VERTICAL DIFFUSION TENDENCY IN 3DTKE SCHEME"  "m s-2"
-
 
 # Pressure and Density
 state    real   p              ikj     dyn_em      1         -      irh       "p"           "perturbation pressure"         "Pa"
@@ -558,7 +543,7 @@ state   real    -              ikjftb  scalar      1         -     -   -
 state   real    qndrop         ikjftb  scalar      1         -     \
    i0rhusdf=(bdy_interp:dt)    "QNDROP"        "Droplet number mixing ratio"        "# kg-1"
 state   real    qni            ikjftb  scalar      1         -     \
-   i0rhusdf=(bdy_interp:dt)    "QNICE"         "Ice Number concentration" "# kg-1"
+   i0rusdf=(bdy_interp:dt)    "QNICE"         "Ice Number concentration" "# kg-1"
 state   real    qni2            ikjftb  scalar      1         -     \
    i0rhusdf=(bdy_interp:dt)    "QNICE2"         "Ice Number concentration cat 2" "# kg-1"
 state   real    qni3            ikjftb  scalar      1         -     \
@@ -568,7 +553,7 @@ state   real    qt             ikjftb  scalar      1         -     \
 state   real    qns            ikjftb  scalar      1         -     \
    i0rhusdf=(bdy_interp:dt)    "QNSNOW"         "Snow Number concentration"   "# kg(-1)"
 state   real    qnr            ikjftb  scalar      1         -     \
-   i0rhusdf=(bdy_interp:dt)    "QNRAIN"        "Rain Number concentration"   "# kg(-1)"
+   i0rusdf=(bdy_interp:dt)    "QNRAIN"        "Rain Number concentration"   "# kg(-1)"
 state   real    qng            ikjftb  scalar      1         -     \
    i0rhusdf=(bdy_interp:dt)    "QNGRAUPEL"     "Graupel Number concentration" "# kg(-1)"
 state   real    qnh            ikjftb  scalar      1         -     \
@@ -1555,7 +1540,7 @@ state integer  STEPCU          -        misc        1         -      r        "S
 state    real  RTHRATEN        ikj      misc        1         -      rd       "RTHRATEN"              "THETA TENDENCY DUE TO RADIATION"              "K s-1"
 state    real  RTHRATENLW      ikj      misc        1         -      r        "RTHRATLW"              "UNCOUPLED THETA TENDENCY DUE TO LONG WAVE RADIATION"    "K s-1"
 state    real  RTHRATENSW      ikj      misc        1         -      r        "RTHRATSW"              "UNCOUPLED THETA TENDENCY DUE TO SHORT WAVE RADIATION"   "K s-1"
-state    real  CLDFRA          ikj      misc        1         -      rh       "CLDFRA"                "CLOUD FRACTION"                                       ""
+state    real  CLDFRA          ikj      misc        1         -      r        "CLDFRA"                "CLOUD FRACTION"                                       ""
 state    real  CLDFRA_OLD      ikj      misc        1         -      r        "CLDFRA_OLD"            "previous time level cldfra"                           ""
 state    real  CLDFRA_BL       ikj      misc        1         -      -        "CLDFRA_BL"             "CLOUD FRACTION pbl"                                   ""
 state    real  CLDT             ij      misc        1         -      -        "CFRACT"                "TOTAL CLOUD FRACTION"                                 ""
@@ -1850,8 +1835,8 @@ state   real  defor12          ikj      misc        1         -     r         "d
 state   real  defor33          ikj      misc        1         z     r         "defor33"               "DEFORMATION 33"              "s-1"      
 state   real  defor13          ikj      misc        1         z     r         "defor13"               "DEFORMATION 13"              "s-1"      
 state   real  defor23          ikj      misc        1         z     r         "defor23"               "DEFORMATION 23"              "s-1"      
-state   real   xkmv            ikj      misc        1         -     r         "xkmv"                  "VERTICAL EDDY VISCOSITY"     "m2 s-1"      
-state   real   xkmh            ikj      misc        1         -     r         "xkmh"                  "HORIZONTAL EDDY VISCOSITY"   "m2 s-1"      
+state   real   xkmv            ikj      misc        1         -     rh         "xkmv"                  "VERTICAL EDDY VISCOSITY"     "m2 s-1"      
+state   real   xkmh            ikj      misc        1         -     rh         "xkmh"                  "HORIZONTAL EDDY VISCOSITY"   "m2 s-1"      
 state   real   xkhv            ikj      misc        1         -     r         "xkhv"                  "VERTICAL EDDY DIFFUSIVITY OF HEAT"                               "m2 s-1"      
 state   real   xkhh            ikj      misc        1         -     r         "xkhh"                  "HORIZONTAL EDDY DIFFUSIVITY OF HEAT"                             "m2 s-1"      
 state   real    div            ikj      misc        1         -     r         "div"                   "DIVERGENCE"                                                      "s-1"
@@ -2915,7 +2900,12 @@ package   mynn_dmp_edmf  bl_mynn_edmf==1            -              state:edmf_a,
 package   pbl_cloud      icloud_bl==1                -             state:cldfra_bl,qc_bl
 
 #SMS-3DTKE
-package   sms_3dtke      km_opt==5                   -             state:gamu,gamv,nlflux,dlk,l_scale,elmin,xkmv_meso,xkmh_t,u_h_tend,u_z_tend,v_h_tend,v_z_tend,w_h_tend,w_z_tend,th_h_tend,th_z_tend,tke_buoy_tend,tke_shear_tend,tke_production_tend,tke_diffusion_h_tend,tke_diffusion_z_tend
+package   sms_3dtke      km_opt==5                   -             state:gamu,gamv,l_diss,nlflux,dlk,elmin,xkmv_meso
+
+# dfi
+# package   mynnpblscheme2_dfi bl_pbl_physics_dfi==5   -             dfi_scalar:dfi_qke_adv
+#
+
 
 # dfi
 package   mynnpblscheme2_dfi bl_pbl_physics_dfi==5   -             dfi_scalar:dfi_qke_adv
